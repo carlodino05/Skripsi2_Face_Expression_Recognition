@@ -515,11 +515,11 @@ class MainWindow(QMainWindow):
             time.sleep(1)  # wait one second
             seconds += 1
 
-            if seconds % 5 == 0:    
+            if seconds % 900 == 0:    
                 print("Capturing image...")
                 self.otomat_photo()  # perform analysis on current photo
 
-            if seconds % 15 == 0:
+            if seconds % 10800 == 0:
                 running = False
 
                 self.generate_pie_chart(predictions=self.tampung_ekspresi)
