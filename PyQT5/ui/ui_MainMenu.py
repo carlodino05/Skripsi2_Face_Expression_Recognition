@@ -1,0 +1,108 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'c:\Users\asus\Documents\Alox\Computer Vision\Skripsi2\PyQT5\ui\MainMenu.ui'
+#
+# Created by: PyQt5 UI code generator 5.9.2
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_main(object):
+    def setupUi(self, main):
+        main.setObjectName("main")
+        main.resize(812, 696)
+        main.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(255, 255, 255, 1), stop:1 rgba(255, 255, 255, 255));")
+        self.bgMainWindow = QtWidgets.QWidget(main)
+        self.bgMainWindow.setStyleSheet("QWidget#bgMainWindow{\n"
+"    \n"
+"    background-color: rgb(170, 255, 255);\n"
+"}")
+        self.bgMainWindow.setObjectName("bgMainWindow")
+        self.gridLayout = QtWidgets.QGridLayout(self.bgMainWindow)
+        self.gridLayout.setObjectName("gridLayout")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setContentsMargins(5, 5, 5, 5)
+        self.verticalLayout.setSpacing(10)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.tabWidget = QtWidgets.QTabWidget(self.bgMainWindow)
+        self.tabWidget.setEnabled(True)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
+        self.tabWidget.setSizePolicy(sizePolicy)
+        self.tabWidget.setWhatsThis("")
+        self.tabWidget.setAutoFillBackground(False)
+        self.tabWidget.setStyleSheet("")
+        self.tabWidget.setObjectName("tabWidget")
+        self.tab = QtWidgets.QWidget()
+        self.tab.setObjectName("tab")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.tab)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        spacerItem = QtWidgets.QSpacerItem(40, 5, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.btn_opencam = QtWidgets.QPushButton(self.tab)
+        self.btn_opencam.setObjectName("btn_opencam")
+        self.horizontalLayout.addWidget(self.btn_opencam)
+        self.btn_analisis = QtWidgets.QPushButton(self.tab)
+        self.btn_analisis.setObjectName("btn_analisis")
+        self.horizontalLayout.addWidget(self.btn_analisis)
+        self.btn_stop = QtWidgets.QPushButton(self.tab)
+        self.btn_stop.setObjectName("btn_stop")
+        self.horizontalLayout.addWidget(self.btn_stop)
+        self.btn_download = QtWidgets.QPushButton(self.tab)
+        self.btn_download.setObjectName("btn_download")
+        self.horizontalLayout.addWidget(self.btn_download)
+        self.verticalLayout_3.addLayout(self.horizontalLayout)
+        self.verticalLayout_2 = QtWidgets.QHBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.image_label = QtWidgets.QLabel(self.tab)
+        self.image_label.setAutoFillBackground(False)
+        self.image_label.setObjectName("image_label")
+        self.verticalLayout_2.addWidget(self.image_label)
+        self.verticalLayout_3.addLayout(self.verticalLayout_2)
+        self.tabWidget.addTab(self.tab, "")
+        self.verticalLayout.addWidget(self.tabWidget)
+        self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
+        main.setCentralWidget(self.bgMainWindow)
+        self.menubar = QtWidgets.QMenuBar(main)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 812, 21))
+        self.menubar.setObjectName("menubar")
+        self.menuFile = QtWidgets.QMenu(self.menubar)
+        self.menuFile.setObjectName("menuFile")
+        self.menuEdit = QtWidgets.QMenu(self.menubar)
+        self.menuEdit.setObjectName("menuEdit")
+        self.menuSettings = QtWidgets.QMenu(self.menubar)
+        self.menuSettings.setObjectName("menuSettings")
+        self.menuHelp = QtWidgets.QMenu(self.menubar)
+        self.menuHelp.setObjectName("menuHelp")
+        main.setMenuBar(self.menubar)
+        self.toolBar = QtWidgets.QToolBar(main)
+        self.toolBar.setObjectName("toolBar")
+        main.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
+        self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuEdit.menuAction())
+        self.menubar.addAction(self.menuSettings.menuAction())
+        self.menubar.addAction(self.menuHelp.menuAction())
+
+        self.retranslateUi(main)
+        self.tabWidget.setCurrentIndex(0)
+        QtCore.QMetaObject.connectSlotsByName(main)
+
+    def retranslateUi(self, main):
+        _translate = QtCore.QCoreApplication.translate
+        main.setWindowTitle(_translate("main", "MainWindow"))
+        self.btn_opencam.setText(_translate("main", "Open Cam"))
+        self.btn_analisis.setText(_translate("main", "Analisis"))
+        self.btn_stop.setText(_translate("main", "stop"))
+        self.btn_download.setText(_translate("main", "Download Report"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("main", "Analasis Wajah"))
+        self.menuFile.setTitle(_translate("main", "File"))
+        self.menuEdit.setTitle(_translate("main", "Edit"))
+        self.menuSettings.setTitle(_translate("main", "Settings"))
+        self.menuHelp.setTitle(_translate("main", "Help"))
+        self.toolBar.setWindowTitle(_translate("main", "toolBar"))
+
