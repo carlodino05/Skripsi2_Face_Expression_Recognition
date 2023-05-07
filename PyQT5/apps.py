@@ -515,16 +515,19 @@ class MainWindow(QMainWindow):
             time.sleep(1)  # wait one second
             seconds += 1
 
-            if seconds % 900 == 0:    
+            if seconds % 5 == 0:
                 print("Capturing image...")
                 self.otomat_photo()  # perform analysis on current photo
 
-            if seconds % 10800 == 0:
+            if seconds % 15 == 0:
                 running = False
 
                 self.generate_pie_chart(predictions=self.tampung_ekspresi)
-                
+                #self.generate_pie_chart_sleepy(ngantuk=self.tampung_mata)
+                #self.generate_pie_chart_all(self.akhir)
+
                 print("All detected emotions:", self.tampung_ekspresi)
+                #print("All Sleepy :", self.tampung_mata)
 
                 print("Timer stopped.")
                 break
@@ -539,7 +542,7 @@ class MainWindow(QMainWindow):
     def stop_timer(self):
         global running
         running = False
-        self.generate_pie_chart(predictions=self.tampung_ekspresi)
+        self.generate_pie_chart()
         #self.generate_pie_chart_sleepy()
 
     def create_folder_new1(self):
@@ -788,14 +791,14 @@ class MainWindow(QMainWindow):
 
         net = cv2.dnn.readNetFromONNX(model)
 
-    def detect_emotion1(self, image_path, faces, folder_path):
+    def detect_emotion1(self, image_path1, faces, folder_path):
         # load classifier for eye detection
         eye_cascade1 = cv2.CascadeClassifier(
             cv2.data.haarcascades + "haarcascade_eye.xml")
         eye_cascade2 = cv2.CascadeClassifier(
             cv2.data.haarcascades + "haarcascade_eye_tree_eyeglasses.xml")
 
-        img = cv2.imread(image_path)
+        img = cv2.imread(image_path1)
         aug_img = cv2.convertScaleAbs(img, alpha=1.5, beta=50)
         if img is not None:
             faces = fd.ssd_detect(aug_img)
@@ -855,7 +858,7 @@ class MainWindow(QMainWindow):
                                       (ex+ew+padding, ey+eh+padding), (0, 255, 0), 2)
                         
                      # Set path untuk menyimpan gambar hasil deteksi pada folder baru
-                    filename = os.path.basename(image_path)
+                    filename = os.path.basename(image_path1)
                     name, ext = os.path.splitext(filename)
                     save_folder = os.path.join(folder_path)
                     save_path = os.path.join(
@@ -875,7 +878,7 @@ class MainWindow(QMainWindow):
                     sleepy = "Sleepy"
                     
                     # Set path untuk menyimpan gambar hasil deteksi pada folder baru
-                    filename = os.path.basename(image_path)
+                    filename = os.path.basename(image_path1)
                     name, ext = os.path.splitext(filename)
                     save_folder = os.path.join(folder_path)
                     save_path = os.path.join(
@@ -1220,32 +1223,33 @@ class MainWindow(QMainWindow):
         self.capture = QCameraImageCapture(self.camera)
         # set filename with timestamp
         filename = f"analysis_face_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.jpg"
-        image_path = os.path.join(self.save_otomat, filename)
+        image_path1 = os.path.join(self.save_otomat, filename)
 
         # remove existing image file if it exists
-        if os.path.exists(image_path):
-            os.remove(image_path)
+        if os.path.exists(image_path1):
+            os.remove(image_path1)
             print("Existing image file removed.")
 
         # capture photo from camera
         self.capture.capture(os.path.join(self.save_otomat, filename))
-
+        
         loop = QEventLoop()
         self.capture.imageCaptured.connect(loop.quit)
         loop.exec_()
-
+        print(f"New image file saved: {image_path1}")
+         
         # save result of face analysis to self.tampung_ekspresi
-        result = self.handle_image_saved_otomat(image_path)
+        result = self.handle_image_saved_otomat(image_path1)
 
-        print(f"New image file saved: {image_path}")
+        
         self.lihat_emosi()
 
         # check if the image has been saved
-        if os.path.exists(image_path):
-            print("Gambar berhasil tersimpan pada path: ", image_path)
+        if os.path.exists(image_path1):
+            print("Gambar berhasil tersimpan pada path: ", image_path1)
 
         else:
-            print("Gagal menyimpan gambar pada path: ", image_path)
+            print("Gagal menyimpan gambar pada path: ", image_path1)
 
     def lihat_emosi(self):
         if len(self.tampung_ekspresi) == 0:
@@ -1271,21 +1275,21 @@ class MainWindow(QMainWindow):
         self.capture.capture(os.path.join(
             self.save_path, "%s.jpg" % ("analysis_face")))
 
-    def handle_image_saved_otomat(self, image_path):
+    def handle_image_saved_otomat(self, image_path1):
 
         # Jalankan fungsi expression detection
 
-        if os.path.exists(image_path):
+        if os.path.exists(image_path1):
             self.init_emotion()
             folder_path1 = self.create_folder_new()
-            pixels = cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2RGB)
+            pixels = cv2.cvtColor(cv2.imread(image_path1), cv2.COLOR_BGR2RGB)
             detector = MTCNN()
             result1 = detector.detect_faces(pixels)
             result_image = self.detect_emotion1(
-                image_path, result1, folder_path1)
-            masuk_folder = cv2.imwrite(image_path, result_image)
+                image_path1, result1, folder_path1)
+            masuk_folder = cv2.imwrite(image_path1, result_image)
         else:
-            print(f"Image file {image_path} not found.")
+            print(f"Image file {image_path1} not found.")
 
     def handle_image_saved(self, image_path):
 
