@@ -506,7 +506,7 @@ class MainWindow(QMainWindow):
     def start_timer(self):
         minutes = 0
         seconds = 0
-        total_time = 900  # 15 minutes in seconds
+        total_time = 10800  # 3 hours
         running = True  # timer is running
         results = []  # list to store analysis results
 
@@ -515,19 +515,17 @@ class MainWindow(QMainWindow):
             time.sleep(1)  # wait one second
             seconds += 1
 
-            if seconds % 5 == 0:
+            if seconds % 900 == 0: # 900 = 15 menit
                 print("Capturing image...")
                 self.otomat_photo()  # perform analysis on current photo
 
-            if seconds % 15 == 0:
+            if seconds % 10800 == 0:
                 running = False
 
                 self.generate_pie_chart(predictions=self.tampung_ekspresi)
-                #self.generate_pie_chart_sleepy(ngantuk=self.tampung_mata)
-                #self.generate_pie_chart_all(self.akhir)
-
+                
                 print("All detected emotions:", self.tampung_ekspresi)
-                #print("All Sleepy :", self.tampung_mata)
+                
 
                 print("Timer stopped.")
                 break
